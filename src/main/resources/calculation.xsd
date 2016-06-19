@@ -1,0 +1,49 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://hackhofer.com/uniqaPoc"
+           targetNamespace="http://hackhofer.com/uniqaPoc" elementFormDefault="qualified">
+
+
+    <xs:element name="calculateRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="person" type="tns:soapperson" minOccurs="1"
+                            maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="calculateResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="calculateResponse" type="tns:oneCacluateRepsonse" minOccurs="1"
+                            maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="oneCacluateRepsonse">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="returnCode" type="xs:short"/>
+            <xs:element name="errorMessage" type="xs:string"/>
+            <xs:element name="premiumAmount" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="soapperson">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="birthDate" type="xs:date"/>
+            <xs:element name="gender" type="tns:gender"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="gender">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="F"/>
+            <xs:enumeration value="M"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

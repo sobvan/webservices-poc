@@ -1,0 +1,34 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <calculateRequest xmlns="http://hackhofer.com/uniqaPoc">
+            <person>
+                <id>1</id>
+                <name>Jane Doe</name>
+                <birthDate>1982-12-18</birthDate>
+                <gender>F</gender>
+            </person>
+
+            <person>
+                <id>2</id>
+                <name>Person with invalid gender</name>
+                <birthDate>1982-12-18</birthDate>
+                <gender>invalid</gender>
+            </person>
+
+            <person>
+                <id>3</id>
+                <name>Too old person</name>
+                <birthDate>1882-12-18</birthDate>
+                <gender>M</gender>
+            </person>
+
+            <person>
+                <id>4</id>
+                <name>Too young person</name>
+                <birthDate>2082-12-18</birthDate>
+                <gender>F</gender>
+            </person>
+
+        </calculateRequest>
+    </Body>
+</Envelope>

@@ -1,0 +1,6 @@
+spring:
+    datasource:
+        url: jdbc:h2:~/uniqapoc-prod;DB_CLOSE_DELAY=-1
+        name:
+        username: uniqapoc-prod
+        password:

@@ -1,0 +1,18 @@
+spring:
+    h2:
+        console:
+            enabled: true
+    jpa:
+        database: H2
+        show_sql: true
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+
+        hibernate:
+          ddl-auto: update
+
+
+    jackson:
+        date-format: yyyy-MM-dd
