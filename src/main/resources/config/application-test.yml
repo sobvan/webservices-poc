@@ -4,3 +4,6 @@ spring:
         name:
         username: uniqapoc-test
         password:
+
+server:
+    port: 5000
