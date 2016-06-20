@@ -49,7 +49,6 @@ public class RestServiceController {
             log.setDate(new Date());
             log.setConcerningPerson(new Person(p.getId()));
             log.setServiceType(ServiceType.JSON);
-            requestLogRepository.save(log);
 
             int birthYear = new DateTime(p.getBirthDate()).getYear();
 
@@ -59,6 +58,8 @@ public class RestServiceController {
             } else {
                 log.setResult("OK");
             }
+
+            requestLogRepository.save(log);
 
             if (birthYear == 2010) {
                 try {
