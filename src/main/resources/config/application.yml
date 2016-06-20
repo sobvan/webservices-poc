@@ -16,3 +16,6 @@ spring:
 
     jackson:
         date-format: yyyy-MM-dd
+
+uniqapoc:
+    urlbase: http://localhost:8080
