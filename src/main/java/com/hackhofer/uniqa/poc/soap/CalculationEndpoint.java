@@ -68,7 +68,6 @@ public class CalculationEndpoint {
             } catch (Exception ex) {
                 logger.error("Error while processing soap request", ex);
             }
-
         }
 
         logger.info("Serving calculate request.");
@@ -76,7 +75,8 @@ public class CalculationEndpoint {
     }
 
     private Person savePerson(Soapperson p) {
-        Person pers = new Person(p.getName(),
+        Person pers = new Person(p.getId(),
+                                 p.getName(),
                                  p.getBirthDate().toGregorianCalendar().getTime(),
                                  p.getGender() == null ? null : p.getGender().value());
         return personRepository.save(pers);

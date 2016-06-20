@@ -44,6 +44,7 @@ public class RestServiceController {
         persons.stream().forEach(p -> {
             result.add(new IdNamePair(p.getId(), p.getName() + "x"));
 
+            p.setOriginalId(p.getId());
             p.setId(null);
             personRepository.save(p);
 

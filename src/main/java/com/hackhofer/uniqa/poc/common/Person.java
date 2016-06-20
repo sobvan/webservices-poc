@@ -24,6 +24,8 @@ public class Person {
     private Long id;
     private String name;
 
+    private Long originalId;
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
     private String gender;
@@ -35,8 +37,8 @@ public class Person {
         this.id = id;
     }
 
-    public Person(String name, Date birthDate, String gender) {
-        this.id = id;
+    public Person(Long originalId, String name, Date birthDate, String gender) {
+        this.originalId = originalId;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -58,7 +60,6 @@ public class Person {
         return gender;
     }
 
-
     public Integer getAge() {
         return Years.yearsBetween(new DateTime(birthDate), new DateTime()).getYears();
     }
@@ -77,5 +78,13 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Long getOriginalId() {
+        return originalId;
+    }
+
+    public void setOriginalId(Long originalId) {
+        this.originalId = originalId;
     }
 }
