@@ -14,6 +14,9 @@
     <xs:element name="calculateResponse">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="returnCode" type="xs:short"/>
+                <xs:element name="errorMessage" type="xs:string"/>
+                <xs:element name="sumPremAmount" type="xs:double"/>
                 <xs:element name="calculateResponse" type="tns:oneCalcuateRepsonse" minOccurs="1"
                             maxOccurs="unbounded"/>
             </xs:sequence>

@@ -7,7 +7,7 @@ import com.hackhofer.uniqa.poc.common.RequestLogRepository;
 import com.hackhofer.uniqa.poc.common.ServiceType;
 import com.hackhofer.uniqapoc.CalculateRequest;
 import com.hackhofer.uniqapoc.CalculateResponse;
-import com.hackhofer.uniqapoc.OneCacluateRepsonse;
+import com.hackhofer.uniqapoc.OneCalcuateRepsonse;
 import com.hackhofer.uniqapoc.Soapperson;
 
 import org.joda.time.DateTime;
@@ -42,22 +42,20 @@ public class CalculationEndpoint {
 
         for(Soapperson p : request.getPerson()) {
             try {
-                OneCacluateRepsonse oneResponse = new OneCacluateRepsonse();
+                OneCalcuateRepsonse oneResponse = new OneCalcuateRepsonse();
                 oneResponse.setId(p.getId());
                 Date today = new Date();
                 Date birthDay = p.getBirthDate().toGregorianCalendar().getTime();
                 if (birthDay.compareTo(today) > 0
                     || p.getBirthDate().getYear() < 1900) {
-                    oneResponse.setReturnCode((short) 1);
-                    oneResponse.setErrorMessage("Birthdate should be before today and after 1900");
+                    setRetrunCodeAndErrorMsg(response, oneResponse, 1, "Birthdate should be before today and after 1900");
                 } else if (p.getBirthDate().getYear() < 1970) {
                     throw new InvalidDateException("InvalidDateException - Birthday should be after 1970 - person id: " + p.getId());
                 } else if (p.getGender() == null) {
-                    oneResponse.setReturnCode((short) 2);
-                    oneResponse.setErrorMessage("Gender can only be \"F\" and \"M\"");
+                    setRetrunCodeAndErrorMsg(response, oneResponse, 2, "Gender can only be \"F\" and \"M\"");
                 } else {
                     oneResponse.setPremiumAmount(getPremAmount(p));
-                    oneResponse.setReturnCode((short) 0);
+                    response.setSumPremAmount(response.getSumPremAmount() + oneResponse.getPremiumAmount());
                 }
                 response.getCalculateResponse().add(oneResponse);
 
@@ -72,6 +70,16 @@ public class CalculationEndpoint {
 
         logger.info("Serving calculate request.");
         return response;
+    }
+
+    private void setRetrunCodeAndErrorMsg(CalculateResponse response, OneCalcuateRepsonse oneResponse, int returnCode, String errorMsg) {
+        if (response.getErrorMessage() == null ) {
+            response.setReturnCode((short) returnCode);
+            response.setErrorMessage(errorMsg);
+        }
+
+        oneResponse.setReturnCode((short) returnCode);
+        oneResponse.setErrorMessage(errorMsg);
     }
 
     private Person savePerson(Soapperson p) {
