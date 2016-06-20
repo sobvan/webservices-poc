@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface RequestLogRepository extends CrudRepository<RequestLog, Long> {
 
-    @Query(value = "select rl from RequestLog rl join fetch rl.concerningPerson")
+    @Query(value = "select rl from RequestLog rl join fetch rl.concerningPerson order by rl.date desc")
     List<RequestLog> findAll();
 
 }

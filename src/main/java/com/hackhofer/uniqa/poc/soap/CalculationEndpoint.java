@@ -40,15 +40,18 @@ public class CalculationEndpoint {
     public CalculateResponse getCountry(@RequestPayload CalculateRequest request) throws Exception {
         CalculateResponse response = new CalculateResponse();
 
-        request.getPerson().stream().forEach(p -> {
+        for(Soapperson p : request.getPerson()) {
             try {
                 OneCacluateRepsonse oneResponse = new OneCacluateRepsonse();
                 oneResponse.setId(p.getId());
                 Date today = new Date();
-                if (p.getBirthDate().toGregorianCalendar().getTime().compareTo(today) > 0
+                Date birthDay = p.getBirthDate().toGregorianCalendar().getTime();
+                if (birthDay.compareTo(today) > 0
                     || p.getBirthDate().getYear() < 1900) {
                     oneResponse.setReturnCode((short) 1);
                     oneResponse.setErrorMessage("Birthdate should be before today and after 1900");
+                } else if (p.getBirthDate().getYear() < 1970) {
+                    throw new InvalidDateException("InvalidDateException - Birthday should be after 1970 - person id: " + p.getId());
                 } else if (p.getGender() == null) {
                     oneResponse.setReturnCode((short) 2);
                     oneResponse.setErrorMessage("Gender can only be \"F\" and \"M\"");
@@ -60,10 +63,13 @@ public class CalculationEndpoint {
 
                 Person pers = savePerson(p);
                 createLogEntry(pers, "" + oneResponse.getReturnCode());
+            } catch (InvalidDateException e) {
+                throw e;
             } catch (Exception ex) {
                 logger.error("Error while processing soap request", ex);
             }
-        });
+
+        }
 
         logger.info("Serving calculate request.");
         return response;

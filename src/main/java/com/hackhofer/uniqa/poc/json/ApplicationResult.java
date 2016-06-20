@@ -7,7 +7,7 @@ import java.util.List;
  * Result for application json service
  */
 public class ApplicationResult {
-    List<IdNamePair> idNamePairs = new ArrayList<>();
+    private List<IdNamePair> idNamePairs = new ArrayList<>();
 
     public List<IdNamePair> getNames() {
         return idNamePairs;

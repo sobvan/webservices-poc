@@ -14,14 +14,14 @@
     <xs:element name="calculateResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="calculateResponse" type="tns:oneCacluateRepsonse" minOccurs="1"
+                <xs:element name="calculateResponse" type="tns:oneCalcuateRepsonse" minOccurs="1"
                             maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
 
-    <xs:complexType name="oneCacluateRepsonse">
+    <xs:complexType name="oneCalcuateRepsonse">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="returnCode" type="xs:short"/>

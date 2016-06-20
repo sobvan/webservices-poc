@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +37,8 @@ public class RestServiceController {
     RequestLogRepository requestLogRepository;
 
     @RequestMapping(value = "/KVFirstCare/application", method = RequestMethod.POST)
-    public ApplicationResult application(@RequestBody List<Person> persons, HttpServletResponse response) {
+    public ApplicationResult application(@RequestBody List<Person> persons,
+                                         HttpServletResponse response) {
         ApplicationResult result = new ApplicationResult();
 
         persons.stream().forEach(p -> {
@@ -52,7 +54,7 @@ public class RestServiceController {
 
             int birthYear = new DateTime(p.getBirthDate()).getYear();
 
-            if (birthYear <1975) {
+            if (birthYear < 1975) {
                 response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
                 log.setResult("406");
             } else {
@@ -63,7 +65,7 @@ public class RestServiceController {
 
             if (birthYear == 2010) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(120000);
                 } catch (InterruptedException e) {
                     logger.error("Waiting aborted", e);
                 }
@@ -77,7 +79,10 @@ public class RestServiceController {
     public List<Person> getPersons() {
         List<Person> result = new ArrayList<>();
         personRepository.findAll().forEach(result::add);
-        return result;
+
+        return result.stream()
+                     .sorted((p1, p2) -> -1 * p1.getId().compareTo(p2.getId()))
+                     .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/requestlogs", method = RequestMethod.GET)
@@ -86,6 +91,4 @@ public class RestServiceController {
         requestLogRepository.findAll().forEach(result::add);
         return result;
     }
-
-
 }
