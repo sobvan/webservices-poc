@@ -7,17 +7,17 @@ import java.util.List;
  * Result for application json service
  */
 public class ApplicationResult {
-    List<String> names = new ArrayList<>();
+    List<IdNamePair> idNamePairs = new ArrayList<>();
 
-    public List<String> getNames() {
-        return names;
+    public List<IdNamePair> getNames() {
+        return idNamePairs;
     }
 
-    public void setNames(List<String> names) {
-        this.names = names;
+    public void setNames(List<IdNamePair> idNamePairs) {
+        this.idNamePairs = idNamePairs;
     }
 
-    public void addName(String name) {
-        names.add(name);
+    public void add(IdNamePair idNamePair) {
+        idNamePairs.add(idNamePair);
     }
 }

@@ -21,7 +21,7 @@ public class Person {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long id;
+    private Long id;
     private String name;
 
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -42,7 +42,7 @@ public class Person {
         this.gender = gender;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,5 +61,21 @@ public class Person {
 
     public Integer getAge() {
         return Years.yearsBetween(new DateTime(birthDate), new DateTime()).getYears();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

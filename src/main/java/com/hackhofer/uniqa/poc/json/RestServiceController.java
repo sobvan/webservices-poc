@@ -40,7 +40,9 @@ public class RestServiceController {
         ApplicationResult result = new ApplicationResult();
 
         persons.stream().forEach(p -> {
-            result.addName(p.getName() + "x");
+            result.add(new IdNamePair(p.getId(), p.getName() + "x"));
+
+            p.setId(null);
             personRepository.save(p);
 
             RequestLog log = new RequestLog();
