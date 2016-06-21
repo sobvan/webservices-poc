@@ -27,10 +27,10 @@ public class SwaggerConfig {
                                                       .apis(RequestHandlerSelectors.basePackage("com.hackhofer.uniqa.poc.json"))
                                                       .build()
                                                       .apiInfo(new ApiInfo(
-                                                          "Uniqa POC API documentation",
-                                                          "This API is a sample used to test RAD platform integratin features.",
+                                                          "Uniqa POC API",
+                                                          "This is an example API for testing RAD platform integration features.",
                                                           "v0.1",
-                                                          "Absolutely no warranty and liability",
+                                                          "Absolutely no warranty or liability",
                                                           new Contact("István Szoboszlai", "", "istvan.szoboszlai@hackhofer.com"),
                                                           "BSD-3 Clause License",
                                                           "https://opensource.org/licenses/BSD-3-Clause"))
