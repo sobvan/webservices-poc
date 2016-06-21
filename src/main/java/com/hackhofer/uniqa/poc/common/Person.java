@@ -1,9 +1,6 @@
 package com.hackhofer.uniqa.poc.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Years;
