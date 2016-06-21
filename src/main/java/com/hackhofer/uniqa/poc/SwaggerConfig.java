@@ -28,12 +28,12 @@ public class SwaggerConfig {
                                                       .build()
                                                       .apiInfo(new ApiInfo(
                                                           "Uniqa POC API documentation",
-                                                          "",
+                                                          "This API is a sample used to test RAD platform integratin features.",
                                                           "v0.1",
-                                                          "",
-                                                          new Contact("", "", ""),
-                                                          "",
-                                                          ""))
+                                                          "Absolutely no warranty and liability",
+                                                          new Contact("István Szoboszlai", "", "istvan.szoboszlai@hackhofer.com"),
+                                                          "BSD-3 Clause License",
+                                                          "https://opensource.org/licenses/BSD-3-Clause"))
                                                       .tags(new Tag("Uniqa Integration POC",
                                                                     "REST api for testing integration."));
     }
