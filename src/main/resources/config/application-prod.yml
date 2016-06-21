@@ -1,13 +1,15 @@
 spring:
-    datasource:
-        url: jdbc:h2:~/uniqapoc-prod;DB_CLOSE_DELAY=5;DB_CLOSE_ON_EXIT=FALSE
-        name:
-        username: uniqapoc-prod
-        password:
+  datasource:
+    url: jdbc:h2:~/uniqapoc-prod;DB_CLOSE_DELAY=5;DB_CLOSE_ON_EXIT=FALSE
+    name:
+    username: uniqapoc-prod
+    password:
 
 server:
-    port: 5000
-
+  port: 5000
 
 uniqapoc:
-    urlbase: http://prod-uniqapoc.szoboszlai.eu
+  urlbase: http://prod-uniqapoc.szoboszlai.eu
+
+logging:
+  file: uniqupoc-prod.log
