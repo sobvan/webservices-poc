@@ -10,4 +10,4 @@ server:
 
 
 uniqapoc:
-    urlbase: http://5.159.232.224:5000
+    urlbase: http://prod-uniqapoc.szoboszlai.eu
