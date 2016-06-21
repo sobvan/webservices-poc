@@ -26,12 +26,18 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long dbId;
+
+    @ApiModelProperty(required = true)
     private String name;
 
+    @ApiModelProperty(required = true)
     private Long id;
 
+    @ApiModelProperty(required = true, example = "1982-12-18")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
+
+    @ApiModelProperty(required = true, value = "Gender of the person. can be M and F", example = "M")
     private String gender;
 
     public Person() {
@@ -46,6 +52,10 @@ public class Person {
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
+    }
+
+    public Person(Person other) {
+        this(other.id, other.name, other.birthDate, other.gender);
     }
 
     public Long getDbId() {
@@ -91,4 +101,6 @@ public class Person {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

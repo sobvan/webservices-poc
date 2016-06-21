@@ -46,7 +46,7 @@ public class RestServiceController {
             result.add(new IdNamePair(p.getId(), p.getName() + "x"));
 
             p.setDbId(null);
-            personRepository.save(p);
+            p.setDbId(personRepository.save(new Person(p)).getDbId());
 
             RequestLog log = new RequestLog();
             log.setDate(new Date());
