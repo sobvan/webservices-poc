@@ -2,6 +2,7 @@ package com.hackhofer.uniqa.poc.json;
 
 import com.hackhofer.uniqa.poc.common.Person;
 import com.hackhofer.uniqa.poc.common.PersonRepository;
+import com.hackhofer.uniqa.poc.common.PersonRequest;
 import com.hackhofer.uniqa.poc.common.RequestLog;
 import com.hackhofer.uniqa.poc.common.RequestLogRepository;
 import com.hackhofer.uniqa.poc.common.ServiceType;
@@ -37,20 +38,19 @@ public class RestServiceController {
     RequestLogRepository requestLogRepository;
 
     @RequestMapping(value = "/KVFirstCare/application", method = RequestMethod.POST)
-    public ApplicationResult application(@RequestBody List<Person> persons,
+    public ApplicationResult application(@RequestBody List<PersonRequest> persons,
                                          HttpServletResponse response) {
         ApplicationResult result = new ApplicationResult();
 
         persons.stream().forEach(p -> {
             result.add(new IdNamePair(p.getId(), p.getName() + "x"));
 
-            p.setOriginalId(p.getId());
-            p.setId(null);
+            p.setDbId(null);
             personRepository.save(p);
 
             RequestLog log = new RequestLog();
             log.setDate(new Date());
-            log.setConcerningPerson(new Person(p.getId()));
+            log.setConcerningPerson(new Person(p.getDbId()));
             log.setServiceType(ServiceType.JSON);
 
             int birthYear = new DateTime(p.getBirthDate()).getYear();
@@ -82,7 +82,7 @@ public class RestServiceController {
         personRepository.findAll().forEach(result::add);
 
         return result.stream()
-                     .sorted((p1, p2) -> -1 * p1.getId().compareTo(p2.getId()))
+                     .sorted((p1, p2) -> -1 * p1.getDbId().compareTo(p2.getDbId()))
                      .collect(Collectors.toList());
     }
 

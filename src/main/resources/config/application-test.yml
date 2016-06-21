@@ -9,4 +9,4 @@ server:
     port: 5001
 
 uniqapoc:
-    urlbase: http://5.159.232.224:5001/
+    urlbase: http://5.159.232.224:5001

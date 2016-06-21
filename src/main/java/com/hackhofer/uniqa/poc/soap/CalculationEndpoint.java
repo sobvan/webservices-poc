@@ -93,7 +93,7 @@ public class CalculationEndpoint {
     private void createLogEntry(Person p, String s) {
         RequestLog log = new RequestLog();
         log.setDate(new Date());
-        log.setConcerningPerson(new Person(p.getId()));
+        log.setConcerningPerson(new Person(p.getDbId()));
         log.setServiceType(ServiceType.SOAP);
         log.setResult(s);
         requestLogRepository.save(log);

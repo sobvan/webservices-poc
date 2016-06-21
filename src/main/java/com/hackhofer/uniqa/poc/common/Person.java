@@ -1,17 +1,21 @@
 package com.hackhofer.uniqa.poc.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Simple Person pojo
@@ -21,10 +25,10 @@ public class Person {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long id;
+    private Long dbId;
     private String name;
 
-    private Long originalId;
+    private Long id;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
@@ -33,19 +37,19 @@ public class Person {
     public Person() {
     }
 
-    public Person(long id) {
-        this.id = id;
+    public Person(long dbId) {
+        this.dbId = dbId;
     }
 
-    public Person(Long originalId, String name, Date birthDate, String gender) {
-        this.originalId = originalId;
+    public Person(Long id, String name, Date birthDate, String gender) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
+    public Long getDbId() {
+        return dbId;
     }
 
     public String getName() {
@@ -64,8 +68,8 @@ public class Person {
         return Years.yearsBetween(new DateTime(birthDate), new DateTime()).getYears();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDbId(Long dbId) {
+        this.dbId = dbId;
     }
 
     public void setName(String name) {
@@ -80,11 +84,11 @@ public class Person {
         this.gender = gender;
     }
 
-    public Long getOriginalId() {
-        return originalId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOriginalId(Long originalId) {
-        this.originalId = originalId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }
