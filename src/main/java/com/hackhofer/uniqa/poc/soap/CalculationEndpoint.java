@@ -52,7 +52,7 @@ public class CalculationEndpoint {
                 } else if (p.getBirthDate().getYear() < 1970) {
                     throw new InvalidDateException("InvalidDateException - Birthday should be minimum 1970 - person id: " + p.getId());
                 } else if (p.getBirthDate().getYear() > 2010) {
-                    throw new InvalidDateException("InvalidDateException - Birthday should be maxium 2010 - person id: " + p.getId());
+                    setRetrunCodeAndErrorMsg(response, oneResponse, 1, "Birthday should be maxium 2010");
                 } else if (p.getGender() == null) {
                     setRetrunCodeAndErrorMsg(response, oneResponse, 2, "Gender can only be \"F\" and \"M\"");
                 } else {
