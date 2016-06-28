@@ -50,7 +50,9 @@ public class CalculationEndpoint {
                     || p.getBirthDate().getYear() < 1900) {
                     setRetrunCodeAndErrorMsg(response, oneResponse, 1, "Birthdate should be before today and after 1900");
                 } else if (p.getBirthDate().getYear() < 1970) {
-                    throw new InvalidDateException("InvalidDateException - Birthday should be after 1970 - person id: " + p.getId());
+                    throw new InvalidDateException("InvalidDateException - Birthday should be minimum 1970 - person id: " + p.getId());
+                } else if (p.getBirthDate().getYear() > 2010) {
+                    throw new InvalidDateException("InvalidDateException - Birthday should be maxium 2010 - person id: " + p.getId());
                 } else if (p.getGender() == null) {
                     setRetrunCodeAndErrorMsg(response, oneResponse, 2, "Gender can only be \"F\" and \"M\"");
                 } else {
