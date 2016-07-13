@@ -1,9 +1,11 @@
 package com.hackhofer.uniqa.poc.json;
 
 import com.hackhofer.uniqa.poc.common.Person;
+import com.hackhofer.uniqa.poc.common.PersonListResult;
 import com.hackhofer.uniqa.poc.common.PersonRepository;
 import com.hackhofer.uniqa.poc.common.PersonRequest;
 import com.hackhofer.uniqa.poc.common.RequestLog;
+import com.hackhofer.uniqa.poc.common.RequestLogListResponse;
 import com.hackhofer.uniqa.poc.common.RequestLogRepository;
 import com.hackhofer.uniqa.poc.common.ServiceType;
 
@@ -77,19 +79,19 @@ public class RestServiceController {
     }
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public List<Person> getPersons() {
+    public PersonListResult getPersons() {
         List<Person> result = new ArrayList<>();
         personRepository.findAll().forEach(result::add);
 
-        return result.stream()
+        return new PersonListResult(result.stream()
                      .sorted((p1, p2) -> -1 * p1.getDbId().compareTo(p2.getDbId()))
-                     .collect(Collectors.toList());
+                     .collect(Collectors.toList()));
     }
 
     @RequestMapping(value = "/requestlogs", method = RequestMethod.GET)
-    public List<RequestLog> getAllRequestLog() {
+    public RequestLogListResponse getAllRequestLog() {
         List<RequestLog> result = new ArrayList<>();
         requestLogRepository.findAll().forEach(result::add);
-        return result;
+        return new RequestLogListResponse(result);
     }
 }
