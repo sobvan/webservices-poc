@@ -4,6 +4,7 @@ import com.hackhofer.uniqa.poc.common.Person;
 import com.hackhofer.uniqa.poc.common.PersonListResult;
 import com.hackhofer.uniqa.poc.common.PersonRepository;
 import com.hackhofer.uniqa.poc.common.PersonRequest;
+import com.hackhofer.uniqa.poc.common.PersonRequestList;
 import com.hackhofer.uniqa.poc.common.RequestLog;
 import com.hackhofer.uniqa.poc.common.RequestLogListResponse;
 import com.hackhofer.uniqa.poc.common.RequestLogRepository;
@@ -40,11 +41,11 @@ public class RestServiceController {
     RequestLogRepository requestLogRepository;
 
     @RequestMapping(value = "/KVFirstCare/application", method = RequestMethod.POST)
-    public ApplicationResult application(@RequestBody List<PersonRequest> persons,
+    public ApplicationResult application(@RequestBody PersonRequestList personRequestList,
                                          HttpServletResponse response) {
         ApplicationResult result = new ApplicationResult();
 
-        persons.stream().forEach(p -> {
+        personRequestList.getPersons().stream().forEach(p -> {
             result.add(new IdNamePair(p.getId(), p.getName() + "x"));
 
             p.setDbId(null);
